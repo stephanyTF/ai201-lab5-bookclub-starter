@@ -14,7 +14,7 @@ def calculate_streak(user_id: str) -> int:
     Calculate a user's current reading streak in consecutive days.
 
     A streak is the number of consecutive calendar days on which the user
-    finished at least one book, counting back from today (or yesterday, if
+    **finished** at least one book, counting back from today (or yesterday, if
     nothing has been finished today yet).
 
     Returns 0 if the user has no reading history or if there is a gap of
@@ -32,7 +32,7 @@ def calculate_streak(user_id: str) -> int:
 
     # Collect unique reading dates, most recent first.
     dates = sorted(
-        set(e.started_at.date() for e in events),
+        set( e.finished_at.date() for e in events), #Location of Bug #1, e.started_at.date --> e.finished_at.date
         reverse=True,
     )
 
